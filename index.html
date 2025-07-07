@@ -15,8 +15,6 @@
     <script src="leaflet-geojson-vt.js"></script>
     <link rel="stylesheet" type="text/css" href="leaflet.css">
     <script src="ba2022.js"></script>
-    <script src="cosc21_simplified.geojson"></script>
-    <script src="cosc22_simplified.geojson"></script>
     <script src="firestation.js"></script>
     <script src="road.js"></script>
     <style>
@@ -91,11 +89,6 @@
                     };
                 },
             };
-            fetch('data/cc21.geojson')
-              .then(res => res.json())
-              .then(cc21 => {
-                var vtcosc2021 = L.geoJson(cc21, options2021).addTo(map);
-              });
 
 
             var options2022 = {
@@ -111,11 +104,7 @@
                     };
                 },
             };
-            fetch('data/cc22.geojson')
-              .then(res => res.json())
-              .then(cc22 => {
-                var vtcosc2022 = L.geoJson(cc22, options2022).addTo(map);
-              });
+
 
             // Create a legend control
             var legend = L.control({ position: 'bottomright' });
@@ -147,6 +136,25 @@
                 return key; // Default to returning the key if no match is found
             }
 
+            Promise.all([
+              fetch('data/cc21.geojson').then(res => res.json()),
+              fetch('data/cc22.geojson').then(res => res.json())
+            ]).then(([cc21, cc22]) => {
+                const vtcosc2021 = L.geoJson(cc21, options2021).addTo(map);
+                const vtcosc2022 = L.geoJson(cc22, options2022).addTo(map);
+
+                const overlaymap = {
+                  'Burned Area 2022': burnt22,
+                  'Land Cover 2021': vtcosc2021,
+                  'Land Cover 2022': vtcosc2022,
+                  'Fire Station': firestation,
+                  'Road': road
+                };
+
+                L.control.layers(basemaps, overlaymap).addTo(map);
+            });
+
+            
             var burnt22 = L.geoJSON(ba22, {
                 fillColor: 'transparent',
                 color: 'red',
@@ -179,15 +187,6 @@
                 }
             });
 
-            var overlaymap = {
-                'Burned Area 2022': burnt22,
-                'Land Cover 2021': vtcosc2021,
-                'Land Cover 2022': vtcosc2022,
-                'Fire Station': firestation,
-                'Road' : road
-            }
-
-            L.control.layers(basemaps, overlaymap).addTo(map);
 
             L.control.scale({
                 position: 'bottomleft',
