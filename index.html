@@ -15,8 +15,8 @@
     <script src="leaflet-geojson-vt.js"></script>
     <link rel="stylesheet" type="text/css" href="leaflet.css">
     <script src="ba2022.js"></script>
-    <script src="https://www.dropbox.com/scl/fi/p6xxdlgqghsxwsnadzr59/cosc21.js?rlkey=p39iefrl0wd8f4huzfu3ofbgf&st=gzhmkc34&raw=1"></script>
-    <script src="https://www.dropbox.com/scl/fi/p27rszcpk4xbpuiiluyhg/cosc22.js?rlkey=1dyony2z5hff4lbuz44piilv4&st=vqcxh8ib&raw=1"></script>
+    <script src="https://www.dropbox.com/scl/fi/dqged12xcn5m0snzc8fbc/cosc21.geojson?rlkey=q2nnc1qwmu5wbivi4mlm08gbt&st=3g9hvq2l&raw=1"></script>
+    <script src="https://www.dropbox.com/scl/fi/npv7dlslxpn05ygsfr6es/cosc22.geojson?rlkey=htjqtdz7m0rmf4f7hb27z4mmx&st=9pnwkj6y&raw=1"></script>
     <script src="firestation.js"></script>
     <script src="road.js"></script>
     <style>
@@ -91,7 +91,12 @@
                     };
                 },
             };
-            var vtcosc2021 = L.geoJson(cc21, options2021);
+            fetch('data/cc21.geojson')
+              .then(res => res.json())
+              .then(cc21 => {
+                var vtcosc2021 = L.geoJson(cc21, options2021).addTo(map);
+              });
+
 
             var options2022 = {
                 maxZoom: 16,
@@ -106,7 +111,11 @@
                     };
                 },
             };
-            var vtcosc2022 = L.geoJson(cc22, options2022);
+            fetch('data/cc22.geojson')
+              .then(res => res.json())
+              .then(cc22 => {
+                var vtcosc2022 = L.geoJson(cc22, options2022).addTo(map);
+              });
 
             // Create a legend control
             var legend = L.control({ position: 'bottomright' });
