@@ -137,8 +137,8 @@
             }
 
             Promise.all([
-              fetch('data/cosc21_simplified.geojson').then(res => res.json()),
-              fetch('data/cosc22_simplified.geojson').then(res => res.json())
+              fetch('cosc21_simplified.geojson').then(res => res.json()),
+              fetch('cosc22_simplified.geojson').then(res => res.json())
             ]).then(([cc21, cc22]) => {
                 const vtcosc2021 = L.geoJson(cc21, options2021).addTo(map);
                 const vtcosc2022 = L.geoJson(cc22, options2022).addTo(map);
