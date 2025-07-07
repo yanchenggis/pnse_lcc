@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project</title>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""></script>
+    <script src="https://unpkg.com/geojson-vt@3.2.0/geojson-vt.js"></script>
+    <script src="leaflet-geojson-vt.js"></script>
+    <link rel="stylesheet" type="text/css" href="leaflet.css">
+    <script src="ba2022.js"></script>
+    <script src="https://drive.google.com/file/d/1S1vYc28fUVCbEcVMp-y_xs0tJv60Znor/view?usp=sharing"></script>
+    <script src="https://drive.google.com/file/d/1QkiP9-ERpjS8GPqAen7m9_RirqJTY2Y7/view?usp=sharing"></script>
+    <script src="firestation.js"></script>
+    <script src="road.js"></script>
+    <style>
+        #map{
+            width: 1000px;
+            height: 800px;
+            border: solid 1px black;
+        }
+    </style>
+</head>
+<body>
+    <section id="project">
+        <h1>PROJECT</h1>
+        <h3>Analyzing the Post-Fire Land Cover Changes in Serra da Estrela Natural Park, Portugal</h3>
+        <p>An analysis was conducted to analyze the 2022 wildfire events and the land cover changes post-wildfire in Serra da Estrela Natural Park. 
+            The interactive relationship between wildfires and land cover dynamics holds profound implications for environmental stability. In Portugal's 
+            expansive Serra da Estrela Natural Park (PNSE), recent wildfires have sparked concern due to their potential impact on this globally 
+            recognized geopark and biogenetic reserve.
+        </p>
+        <p>This study focuses on analyzing land cover changes pre- and post-major wildfires in 2022 within PNSE. Leveraging cutting-edge remote 
+            sensing techniques, including Sentinel 2 satellite imagery and Geographic Information System (GIS) analysis, with the aim to unveil the relationship 
+            between fire severity and vulnerable land covers. This research will provide invaluable insights crucial for crafting effective environmental 
+            and wildfire risk management policies, benefiting both PNSE and broader conservation efforts in Portugal.
+        </p>
+        <div id="map" style="height: 700px;"></div>
+
+        <script>
+            let map = L.map(document.getElementById('map'),
+            {center: [40.4, -7.4],
+            zoom: 9.5
+            });
+          
+            var basemaps = {
+              "OSM": L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; OpenStreetMap contributors'
+              }).addTo(map),
+              "Satellite": L.tileLayer('https://www.google.com/maps/vt/lyrs=s&x={x}&y={y}&z={z}', {
+                attribution: 'Google'
+              }),
+              "Carto Dark": L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap contributors, © CartoDB'
+                }),
+            };
+
+            var landColors = {
+                "Artificialized territories": "#403C37",
+                "Autumn/winter annual crops": "#EF9B29",
+                "Spring/summer annual crops": "#33FFFC",
+                "Other agricultural areas": "#FAF07C",
+                "Cork oak and holm oak": "#900EA5",
+                "Eucalyptus": "#80F906",
+                "Other hardwoods": "#8FE13C",
+                "Maritime pine": "#61D661",
+                "Stone pine": "#168A0D",
+                "Other resinous plants": "#166160",
+                "Bushes": "#9B6D26",
+                "Spontaneous herbaceous vegetation": "#DCAC7F",
+                "Surface without vegetation": "#9E9B98",
+                "Water": "#2953EF"
+            };
+
+            var options2021 = {
+                maxZoom: 16,
+                tolerance: 3,
+                debug: 0,
+                style: function (feature) {
+                    return {
+                        fillColor: landColors[feature.properties.Land] || "white",
+                        fillOpacity: 0.7,
+                        color: 'transparent',
+                        weight: 1
+                    };
+                },
+            };
+            var vtcosc2021 = L.geoJson(cc21, options2021);
+
+            var options2022 = {
+                maxZoom: 16,
+                tolerance: 3,
+                debug: 0,
+                style: function (feature) {
+                    return {
+                        fillColor: landColors[feature.properties.Land] || "white",
+                        fillOpacity: 0.7,
+                        color: 'transparent',
+                        weight: 1
+                    };
+                },
+            };
+            var vtcosc2022 = L.geoJson(cc22, options2022);
+
+            // Create a legend control
+            var legend = L.control({ position: 'bottomright' });
+
+            // Function to add legend entries
+            legend.onAdd = function (map) {
+                var div = L.DomUtil.create('div', 'legend');
+                
+                // Add legend title
+                div.innerHTML += '<h4>Land Cover</h4>';
+
+                // Loop through the landColors object and add legend entries
+                for (var key in landColors) {
+                    if (landColors.hasOwnProperty(key)) {
+                        var landValue = getLandValueByKey(key);
+                        div.innerHTML += '<div class="legend-entry"><span style="background:' + landColors[key] + '"></span> ' + landValue + '</div>';
+                    }
+                }
+
+                return div;
+            };
+
+            // Add the legend to the map
+            legend.addTo(map);
+
+            // Function to get the corresponding Land value based on the key
+            function getLandValueByKey(key) {
+                // Adapt this function based on your data structure
+                return key; // Default to returning the key if no match is found
+            }
+
+            var burnt22 = L.geoJSON(ba22, {
+                fillColor: 'transparent',
+                color: 'red',
+                weight: 1
+            });
+
+            var road = L.geoJSON(rd, {
+            color: 'black', 
+            weight: 1,
+            onEachFeature: function (feature, layer) {
+                    var popupContent = 'Road Designation: ' + feature.properties.ref;
+
+                layer.bindPopup(popupContent);
+
+                layer.on('mouseover', function() {layer.openPopup();});
+                layer.on('mouseout', function() {layer.closePopup();});
+                }
+            });
+
+            var firestation = L.geoJSON(fs, { 
+                onEachFeature: function (feature, layer) {
+                    var popupContent = 'Name: ' + feature.properties.Name + '<br>' +
+                    'Address: ' + feature.properties.Snippet + '<br>' +
+                    'Details: ' + feature.properties.FolderPath;
+
+                layer.bindPopup(popupContent);
+
+                layer.on('mouseover', function() {layer.openPopup();});
+                layer.on('mouseout', function() {layer.closePopup();});
+                }
+            });
+
+            var overlaymap = {
+                'Burned Area 2022': burnt22,
+                'Land Cover 2021': vtcosc2021,
+                'Land Cover 2022': vtcosc2022,
+                'Fire Station': firestation,
+                'Road' : road
+            }
+
+            L.control.layers(basemaps, overlaymap).addTo(map);
+
+            L.control.scale({
+                position: 'bottomleft',
+            }).addTo(map);
+  </script>
+          
+    </section>
+</body>
+</html>

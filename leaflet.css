@@ -1,0 +1,30 @@
+
+    .legend {
+        background-color: #f8f8f89b; /* Light grey background color */
+        opacity: 1;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        max-height: 400px; /* Set a max height for the legend to enable scrolling if needed */
+        overflow-y: auto; /* Enable vertical scrolling if the content exceeds the max height */
+    }
+
+    .legend-entries {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .legend-entry {
+        margin-right: 10px;
+        margin-bottom: 5px;
+        display: flex;
+        align-items: center;
+    }
+
+    .legend-entry span {
+        display: inline-block;
+        width: 20px;
+        height: 10px; /* Adjust the height as needed */
+        margin-right: 5px;
+    }
+
