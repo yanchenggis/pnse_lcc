@@ -40,48 +40,7 @@
         </p>
         <p>Given PNSE's status as a recognized Biogenetic Reserve and Geopark, monitoring post-wildfire recovery and vegetation dynamics is crucial for ecosystem management 
             and disaster preparedness.</p>
-        <h2>Methodology & Data Sources</h2>
-        <h3>Remote Sensing Analysis</h3>
-        <p><strong>Sentinel-2 Satellite Imagery:</strong> Utilized for computing the differenced Normalized Burn Ratio (dNBR) to assess fire severity and burned area extent</p>
-        <h3>Geospatial Data Integration</h3>
-        <p><strong>COSC Land Cover Data:</strong> Incorporated 2021 and 2022 land cover datasets from SNIG Portugal to analyze pre- and post-fire land cover changes</p>
-        <p><strong>Infrastructure Data:</strong> Incorporated fire station locations and road networks from OpenStreetMap to provide context for emergency response capabilities and accessibility</p>
-        <p><strong>Boundary Data:</strong> Used official PNSE boundaries to focus analysis on the protected area</p>
-        <h3>Technical Implementation</h3>
-        <p><strong>Web Mapping Platform:</strong> Developed using HTML, CSS, and Leaflet.js for interactive visualization</p>
-        <p><strong>Multi-layer Analysis:</strong> Combined all datasets into a cohesive interactive mapping interface</p>
-        <p><strong>Stakeholder-Focused Design:</strong> Designed for use by park managers, researchers, and policy makers</p>
-        <h2>Key Features</h2>
-        <p>The interactive map enables users to:</p>
-        <p>• Compare pre-fire (2021) and post-fire (2022) land cover conditions</p>
-        <p>• Visualize fire severity patterns through dNBR analysis</p>
-        <p>• Examine spatial relationships between burned areas and infrastructure</p>
-        <p>• Assess impacts on different vegetation communities within PNSE</p>
-        <p>• Support evidence-based decision making for restoration and management strategies</p>
-        <h2>Significance</h2>
-        <p>This analysis provides essential insights for:</p>
-        <p><strong>Environmental Management:</strong> Understanding ecosystem impacts and recovery patterns</p>
-        <p><strong>Conservation Planning:</strong> Informing habitat restoration priorities</p>
-        <p><strong>Fire Risk Assessment:</strong> Identifying vulnerable areas for future wildfire management</p>
-        <p><strong>Policy Development:</strong> Supporting evidence-based environmental policies for PNSE and similar protected areas across Portugal</p>
-        <h2>Data Sources</h2>
-        <p><strong>Land Cover:</strong> COSC 2021 and 2022 datasets (SNIG Portugal)</p>
-        <p><strong>Satellite Imagery:</strong> Sentinel-2 for dNBR analysis</p>
-        <p><strong>Infrastructure:</strong> OpenStreetMap (fire stations and road networks)</p>
-        <p><strong>Study Area:</strong> Serra da Estrela Natural Park boundaries</p>
-        <footer>
-            <p>This project demonstrates the critical importance of integrating remote sensing, GIS analysis, and web mapping technologies for post-disaster environmental monitoring and 
-                management in protected areas.</p>
-        </footer>
         <br>
-
-         footer {
-            text-align: center;
-            padding: 30px;
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 0.9em;
-        }
-        
         <div id="map" style="height: 700px;"></div>
 
         <script>
@@ -235,7 +194,49 @@
                 position: 'bottomleft',
             }).addTo(map);
   </script>
-          
+        <h2>Methodology & Data Sources</h2>
+        <h3>Remote Sensing Analysis</h3>
+        <p><strong>Sentinel-2 Satellite Imagery:</strong> Utilized for computing the differenced Normalized Burn Ratio (dNBR) to assess fire severity and burned area extent</p>
+        <br>
+        <h3>Geospatial Data Integration</h3>
+        <p><strong>COSC Land Cover Data:</strong> Incorporated 2021 and 2022 land cover datasets from SNIG Portugal to analyze pre- and post-fire land cover changes</p>
+        <p><strong>Infrastructure Data:</strong> Incorporated fire station locations and road networks from OpenStreetMap to provide context for emergency response capabilities and accessibility</p>
+        <p><strong>Boundary Data:</strong> Used official PNSE boundaries to focus analysis on the protected area</p>
+        <br>
+        <h3>Technical Implementation</h3>
+        <p><strong>Web Mapping Platform:</strong> Developed using HTML, CSS, and Leaflet.js for interactive visualization</p>
+        <p><strong>Multi-layer Analysis:</strong> Combined all datasets into a cohesive interactive mapping interface</p>
+        <p><strong>Stakeholder-Focused Design:</strong> Designed for use by park managers, researchers, and policy makers</p>
+        <h2>Key Features</h2>
+        <p>The interactive map enables users to:</p>
+        <p>• Compare pre-fire (2021) and post-fire (2022) land cover conditions</p>
+        <p>• Visualize fire severity patterns through dNBR analysis</p>
+        <p>• Examine spatial relationships between burned areas and infrastructure</p>
+        <p>• Assess impacts on different vegetation communities within PNSE</p>
+        <p>• Support evidence-based decision making for restoration and management strategies</p>
+        <h2>Significance</h2>
+        <p>This analysis provides essential insights for:</p>
+        <p><strong>Environmental Management:</strong> Understanding ecosystem impacts and recovery patterns</p>
+        <p><strong>Conservation Planning:</strong> Informing habitat restoration priorities</p>
+        <p><strong>Fire Risk Assessment:</strong> Identifying vulnerable areas for future wildfire management</p>
+        <p><strong>Policy Development:</strong> Supporting evidence-based environmental policies for PNSE and similar protected areas across Portugal</p>
+        <h2>Data Sources</h2>
+        <p><strong>Land Cover:</strong> COSC 2021 and 2022 datasets (SNIG Portugal)</p>
+        <p><strong>Satellite Imagery:</strong> Sentinel-2 for dNBR analysis</p>
+        <p><strong>Infrastructure:</strong> OpenStreetMap (fire stations and road networks)</p>
+        <p><strong>Study Area:</strong> Serra da Estrela Natural Park boundaries</p>
+        <footer>
+            This project demonstrates the critical importance of integrating remote sensing, GIS analysis, and web mapping technologies for post-disaster environmental monitoring and 
+            management in protected areas.
+        </footer>
+        <br>
+
+         footer {
+            text-align: center;
+            padding: 30px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9em;
+        }
     </section>
 </body>
 </html>
