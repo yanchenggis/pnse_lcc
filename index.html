@@ -22,6 +22,43 @@
         h1 { color:#2c3e50; font-size:1.7rem; }
         h3 { color:#34495e; }
         h4 { font-weight: normal; font-style: italic; }
+        footer {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 2rem 0;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .email-link {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            border: 2px solid #667eea;
+        }
+
+        .email-link:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .copyright { 
+            text-align:center; 
+            font-size:0.9rem; 
+            color:#777; 
+            margin-top:40px; 
+        }
         #map{
             width: 1000px;
             height: 800px;
@@ -233,7 +270,15 @@
         <p><strong>• Study Area:</strong> Serra da Estrela Natural Park boundaries</p>
     </section>
     <footer>
-        © 2023-2025 YanChengGIS. All rights reserved.
+        <div class="container">
+            <div class="footer-content">
+                <p>Get in touch:</p>
+                <a href="mailto:yanchenggis@gmail.com" class="email-link">yanchenggis@gmail.com</a>
+            </div>
+            <div class="copyright">
+                © 2023-2025 YanChengGIS. All rights reserved.
+            </div>
+        </div>
     </footer>
 </body>
 </html>
